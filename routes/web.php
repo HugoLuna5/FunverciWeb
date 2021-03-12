@@ -35,11 +35,30 @@ Route::get('/', function () {
 /**
  * Routes Admin
  */
-
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::prefix('/admin')->group(function () {
 
-        Route::get('', '');
+        Route::get('', 'App\Http\Controllers\Admin\HomeController@index')->name('homeAdmin');
+
+
+        Route::prefix('/users')->group(function () {
+            Route::get('', 'App\Http\Controllers\Admin\UserController@index')->name('usersAdmin');
+            Route::get('/create', 'App\Http\Controllers\Admin\UserController@create')->name('userCreateAdmin');
+            Route::post('/save', 'App\Http\Controllers\Admin\UserController@save')->name('userSaveAdmin');
+            Route::get('/show/{id}', 'App\Http\Controllers\Admin\UserController@show')->name('userShowAdmin');
+            Route::post('/delete', 'App\Http\Controllers\Admin\UserController@delete')->name('userDeleteAdmin');
+            Route::post('/update', 'App\Http\Controllers\Admin\UserController@update')->name('userUpdateAdmin');
+        });
+
+
+        Route::prefix('/af')->group(function () {
+            Route::get('', 'App\Http\Controllers\Admin\AfiliadoController@index')->name('afAdmin');
+            Route::get('/create', 'App\Http\Controllers\Admin\AfiliadoController@create')->name('afCreateAdmin');
+            Route::post('/save', 'App\Http\Controllers\Admin\AfiliadoController@save')->name('afSaveAdmin');
+            Route::get('/show/{id}', 'App\Http\Controllers\Admin\AfiliadoController@show')->name('afShowAdmin');
+            Route::post('/delete', 'App\Http\Controllers\Admin\AfiliadoController@delete')->name('afDeleteAdmin');
+            Route::post('/update', 'App\Http\Controllers\Admin\AfiliadoController@update')->name('afUpdateAdmin');
+        });
 
     });
 });
