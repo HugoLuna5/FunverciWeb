@@ -60,6 +60,15 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
             Route::post('/update', 'App\Http\Controllers\Admin\AfiliadoController@update')->name('afUpdateAdmin');
         });
 
+        Route::prefix('/tp')->group(function () {
+            Route::get('', 'App\Http\Controllers\Admin\TrasnporteController@index')->name('tpAdmin');
+            Route::get('/create', 'App\Http\Controllers\Admin\TrasnporteController@create')->name('tpCreateAdmin');
+            Route::post('/save', 'App\Http\Controllers\Admin\TrasnporteController@save')->name('tpSaveAdmin');
+            Route::get('/show/{id}', 'App\Http\Controllers\Admin\TrasnporteController@show')->name('tpShowAdmin');
+            Route::post('/delete', 'App\Http\Controllers\Admin\TrasnporteController@delete')->name('tpDeleteAdmin');
+            Route::post('/update', 'App\Http\Controllers\Admin\TrasnporteController@update')->name('tpUpdateAdmin');
+        });
+
     });
 });
 
